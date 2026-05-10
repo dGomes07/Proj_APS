@@ -51,7 +51,6 @@
             <input type="number" id="area" class="form-control">
         </div>
 
-        <!-- Radio -->
         <div class="mb-3">
             <label class="form-label">Tipo de serviço</label>
 
@@ -71,39 +70,36 @@
             </div>
         </div>
 
-        <!-- Select -->
         <div class="mb-3">
             <label class="form-label">Tipo de Solo</label>
 
-            <select class="form-select">
+            <select class="form-select" id="solo">
                 <option>Argiloso</option>
                 <option>Arenoso</option>
                 <option>Humoso</option>
             </select>
         </div>
 
-        <!-- Checkbox -->
         <div class="mb-3">
             <label class="form-label">Extras</label>
 
             <div>
-                <input type="checkbox" id="irrigacao">
+                <input type="checkbox" id="irrig">
                 Irrigação Sustentável (+200)
             </div>
 
             <div>
-                <input type="checkbox" id="analise">
+                <input type="checkbox" id="soloCheck">
                 Análise do Solo (+150)
             </div>
         </div>
 
-        <button type="button" class="btn btn-success" onclick="calcularOrcamento()">
+        <button type="button" class="btn btn-success" onclick="calc_orc()">
             Calcular
         </button>
 
     </form>
 
-    <!-- Resultado -->
     <section class="resultado mt-4">
         <div id="resultado"></div>
     </section>
