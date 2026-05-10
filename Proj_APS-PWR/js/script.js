@@ -1,73 +1,71 @@
-// Função principal do orçamento
-function calcularOrcamento() {
+function calc_orc() {
 
-    // Captura da área
-    let area = Number(document.getElementById("area").value);
+    let metragem = Number(document.getElementById("area").value);
 
-    // Captura do serviço selecionado
-    let servicos = document.getElementsByName("servico");
+    let tipos = document.getElementsByName("servico");
 
-    let valorServico = 0;
-    let nomeServico = "";
+    let preco = 0;
+    let serv = "";
 
-    for (let i = 0; i < servicos.length; i++) {
+    for (let x = 0; x < tipos.length; x++) {
 
-        if (servicos[i].checked) {
+        if (tipos[x].checked) {
 
-            valorServico = Number(servicos[i].value);
+            preco = Number(tipos[x].value);
 
-            if (valorServico === 10) {
-                nomeServico = "Básico";
-            }
+            switch (preco) {
 
-            else if (valorServico === 20) {
-                nomeServico = "Médio";
-            }
+                case 10:
+                    serv = "Básico";
+                    break;
 
-            else {
-                nomeServico = "Avançado";
+                case 20:
+                    serv = "Médio";
+                    break;
+
+                default:
+                    serv = "Avançado";
             }
         }
     }
 
-    // Cálculo base
-    let total = area * valorServico;
+    let valorFinal = metragem * preco;
 
-    // Extras
-    if (document.getElementById("irrigacao").checked) {
-        total += 200;
+    let irrig = document.getElementById("irrig");
+    let analiseSolo = document.getElementById("soloCheck");
+
+    if (irrig.checked) {
+        valorFinal += 200;
     }
 
-    if (document.getElementById("analise").checked) {
-        total += 150;
+    if (analiseSolo.checked) {
+        valorFinal += 150;
     }
 
-    // Mensagem simples
-    let mensagem = "";
+    let aviso = "";
 
-    if (total < 1000) {
-        mensagem = "Projeto ideal para pequenos terrenos.";
+    if (valorFinal < 1000) {
+
+        aviso = "Projeto ideal para pequenos terrenos.";
+
+    } else if (valorFinal < 3000) {
+
+        aviso = "Projeto recomendado para áreas médias.";
+
+    } else {
+
+        aviso = "Projeto indicado para grandes áreas.";
     }
 
-    else if (total < 3000) {
-        mensagem = "Projeto recomendado para áreas médias.";
-    }
-
-    else {
-        mensagem = "Projeto indicado para grandes áreas.";
-    }
-
-    // Exibição do resultado
     document.getElementById("resultado").innerHTML = `
         <h3>Resultado do Orçamento</h3>
 
-        <p><strong>Serviço:</strong> ${nomeServico}</p>
+        <p><strong>Serviço:</strong> ${serv}</p>
 
-        <p><strong>Valor Total:</strong> R$ ${total}</p>
+        <p><strong>Valor Total:</strong> R$ ${valorFinal}</p>
 
-        <p>${mensagem}</p>
+        <p>${aviso}</p>
     `;
 
-    // Salvando no localStorage
-    localStorage.setItem("ultimoOrcamento", total);
+    localStorage.setItem("ult_orc", valorFinal);
 }
